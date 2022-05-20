@@ -1,51 +1,62 @@
-import { useState } from "react"
+import { useState } from 'react'
+import { Form, Button } from 'react-bootstrap'
 
-const Blog = ({blog, incrementLikes, deleteBlog}) => {
+const Blog = ({blog, incrementLikes, addNewComment}) => {
 
-  const [displayAll, setDisplayAll] = useState(false)
+  const user = blog.user
 
-  const toggleDisplay = () => {
-    setDisplayAll(!displayAll)
+  const [comment, setComment] = useState('')
+
+  const handleOnChange = (event) => {
+    setComment(event.target.value)
   }
 
-  const blogStyleWhenHidden = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-    display: displayAll ? 'none' : '' 
-  }
-
-  const blogStyleWhenNotHidden = {
-    paddingTop: 10,
-    paddingLeft: 2,
-    border: 'solid',
-    borderWidth: 1,
-    marginBottom: 5,
-    display: displayAll ? '' : 'none' 
+  const addComment = (event) => {
+    event.preventDefault()
+    addNewComment(blog.id, comment)
+    setComment('')
   }
 
   return(
-    <li>
       <div>
         <h2>
           {blog.title} by {blog.author}
         </h2>
-        <p>{blog.url}
-        <br>
+        <div>
+          {blog.url}
+        </div>
+        <div>
         {blog.likes}
-          <button onClick={incrementLikes}>
+          <Button variant='light' onClick={() => incrementLikes(blog.id)}>
             Like
-          </button>
-        </br>
-        <br>
-        Added by {blog.user.name}
-        </br>
-        </p>
+          </Button>
+        </div>
+        <div>
+        Added by {user.name}
+        </div>
+        <h3>Comments</h3>
+        <ul>
+          {blog.comments.map(comment =>
+            <li key={blog.comments.indexOf(comment)}>
+              {comment}
+            </li>)}
+        </ul>
+        <Form onSubmit={addComment}>
+        <Form.Group>
+         <Form.Label>
+           Comment:
+          </Form.Label>
+           <Form.Control
+             type="text"
+             name="comment"
+             value={comment}
+             onChange={handleOnChange}
+           />
+           <p></p>
+         <Button variant="primary" type="submit">Add Comment</Button>
+         </Form.Group>
+       </Form>
       </div>
-    </li>
-
   )
 }
 

@@ -1,3 +1,6 @@
+import { useNavigate } from "react-router-dom"
+import { Form, Button } from 'react-bootstrap'
+
 const LoginForm = ({
     handleSubmit,
     handleUsernameChange,
@@ -5,30 +8,35 @@ const LoginForm = ({
     username,
     password
    }) => {
+
+
    return (
      <div>
-       <h2>Login</h2>
- 
-       <form onSubmit={handleSubmit}>
-         <div>
-           username
-           <input
-           id='username'
+       <h2>Login to the application</h2>
+       <Form onSubmit={handleSubmit}>
+        <Form.Group>
+         <Form.Label>
+           Username:
+          </Form.Label>
+           <Form.Control
+             type="text"
+             name="username"
              value={username}
              onChange={handleUsernameChange}
            />
-         </div>
-         <div>
-           password
-           <input
-           id='password'
-             type="password"
+          <Form.Label>
+           Password:
+           </Form.Label>
+           <Form.Control
+           name='password'
+             type="text"
              value={password}
              onChange={handlePasswordChange}
            />
-       </div>
-         <button id="login-button" type="submit">login</button>
-       </form>
+           <p></p>
+         <Button variant="primary" type="submit">Login</Button>
+         </Form.Group>
+       </Form>
      </div>
    )
  }

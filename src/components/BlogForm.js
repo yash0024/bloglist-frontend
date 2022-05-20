@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState } from "react"
+import { Form, Button } from 'react-bootstrap'
 
 const BlogForm = ({ createBlog }) => {
     const [newBlog, setNewBlog] = useState('') 
@@ -31,37 +32,40 @@ const BlogForm = ({ createBlog }) => {
 
       return (
         <div>
-            <h2>Create a new blog</h2>
-            <form onSubmit={addBlog}>
-                <div>
-                title
-                <input
-                value={newBlog}
-                onChange={handleBlogChange}
-                placeholder='Write title'
-                id='title'
-                />
-                </div>
-                <div>
-                author
-                <input
-                value={author}
-                onChange={handleAuthorChange}
-                placeholder='Write author'
-                id='author'
-                />
-                </div>
-                <div>
-                url
-                <input
-                value={url}
-                onChange={handleUrlChange}
-                placeholder='Write url'
-                id='url'
-                />
-                </div>
-                <button type="submit">Save</button>
-           </form>  
+          <h2>Create a new blog</h2>
+        <Form onSubmit={addBlog}>
+        <Form.Group>
+         <Form.Label>
+           Title:
+          </Form.Label>
+           <Form.Control
+             type="text"
+             name="title"
+             value={newBlog}
+             onChange={handleBlogChange}
+           />
+          <Form.Label>
+           Author:
+           </Form.Label>
+           <Form.Control
+           name='author'
+             type="text"
+             value={author}
+             onChange={handleAuthorChange}
+           />
+          <Form.Label>
+           Url:
+           </Form.Label>
+           <Form.Control
+           name='url'
+             type="text"
+             value={url}
+             onChange={handleUrlChange}
+           />
+           <p></p>
+         <Button variant="primary" type="submit">Save</Button>
+         </Form.Group>
+       </Form>
         </div>
       )
 }
