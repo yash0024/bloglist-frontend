@@ -29,7 +29,7 @@ const LoginForm = ({
            </Form.Label>
            <Form.Control
            name='password'
-             type="text"
+             type="password"
              value={password}
              onChange={handlePasswordChange}
            />
